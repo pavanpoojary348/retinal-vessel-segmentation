@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Course Project Abstract — Morph-ViT</title>
+<style>
+  @page {
+    size: A4 portrait;
+    margin: 15mm 18mm 15mm 18mm;
+  }
+  body {
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 10.5pt;
+    line-height: 1.35;
+    color: #111;
+    margin: 0 auto;
+    max-width: 800px;
+    padding: 10px 20px;
+  }
+  .header-banner {
+    text-align: center;
+    border-bottom: 2px solid #0e223d;
+    padding-bottom: 8px;
+    margin-bottom: 12px;
+  }
+  .course-tag {
+    font-family: Arial, sans-serif;
+    font-size: 9pt;
+    font-weight: bold;
+    color: #0e223d;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 4px;
+  }
+  h1 {
+    font-size: 15pt;
+    font-weight: bold;
+    color: #0e223d;
+    margin: 4px 0 6px 0;
+    line-height: 1.25;
+  }
+  .meta-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 10px;
+    font-size: 9.5pt;
+    background: #f7f9fc;
+    border: 1px solid #d0d7de;
+  }
+  .meta-table td {
+    padding: 4px 8px;
+    border: 1px solid #d0d7de;
+  }
+  .meta-label {
+    font-weight: bold;
+    color: #0e223d;
+    width: 20%;
+  }
+  h2 {
+    font-size: 11.5pt;
+    font-weight: bold;
+    color: #0e223d;
+    border-bottom: 1px solid #0e223d;
+    padding-bottom: 2px;
+    margin: 10px 0 6px 0;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+  p {
+    margin: 0 0 6px 0;
+    text-align: justify;
+  }
+  .method-list {
+    margin: 4px 0 8px 18px;
+    padding: 0;
+  }
+  .method-list li {
+    margin-bottom: 4px;
+    text-align: justify;
+  }
+  .results-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 8px 0;
+    font-size: 9pt;
+  }
+  .results-table th, .results-table td {
+    border: 1px solid #333;
+    padding: 3px 6px;
+    text-align: center;
+  }
+  .results-table th {
+    background-color: #0e223d;
+    color: #ffffff;
+    font-weight: bold;
+  }
+  .results-table td:first-child {
+    text-align: left;
+    font-weight: bold;
+  }
+  .highlight-col {
+    background-color: #eaf3fb;
+    font-weight: bold;
+    color: #0e223d;
+  }
+  .ref-list {
+    margin: 4px 0 0 16px;
+    padding: 0;
+    font-size: 8.5pt;
+    line-height: 1.3;
+  }
+  .ref-list li {
+    margin-bottom: 2px;
+  }
+  @media print {
+    body {
+      padding: 0;
+    }
+  }
+</style>
+</head>
+<body>
+
+<div class="header-banner">
+  <div class="course-tag">Department of Computer Science & Engineering | Course Project Review 1</div>
+  <h1>Automated Retinal Blood Vessel Segmentation Using Mathematical Morphology and Vision Transformers (Morph-ViT)</h1>
+</div>
+
+<table class="meta-table">
+  <tr>
+    <td class="meta-label">Course:</td>
+    <td>Fundamentals of Image Processing (FIP)</td>
+    <td class="meta-label">Review Date:</td>
+    <td>11/11/2026 (Final Viva: 24/11/2026)</td>
+  </tr>
+  <tr>
+    <td class="meta-label">Team Members:</td>
+    <td><strong>[Insert Student Names & USN / Roll Numbers]</strong></td>
+    <td class="meta-label">Benchmark:</td>
+    <td>DRIVE Dataset (40 images, 576&times;576 resolution)</td>
+  </tr>
+</table>
+
+<h2>Project Abstract</h2>
+<p>
+Automated segmentation of the retinal vascular tree from fundus photography is an essential clinical diagnostic tool for the early detection and management of systemic microvascular diseases, including Diabetic Retinopathy, Arteriosclerosis, Stroke Risk, and Glaucoma. Manual delineation by expert ophthalmologists is time-consuming (1–2 hours per image), prone to inter-observer subjectivity, and impossible to scale for mass screening programs. The segmentation task poses three severe digital image processing challenges: (i) extreme class imbalance (~10% vessel pixels vs. ~90% background), (ii) low local contrast of peripheral microcapillaries, and (iii) non-uniform spherical illumination vignetting.
+</p>
+
+<h2>Proposed Methodology (Morph-ViT)</h2>
+<p>
+We propose <strong>Morph-ViT</strong>, a hybrid framework that bridges syllabus-grounded mathematical morphology (Units II & III) with Vision Transformer (ViT) self-attention:
+</p>
+<ol class="method-list">
+  <li><strong>Optical Preprocessing & CLAHE:</strong> Hemoglobin absorbs light maximally at 540–580 nm. The green channel is isolated and enhanced using Contrast-Limited Adaptive Histogram Equalization (CLAHE, 8&times;8 tiles, clip limit 2.0) to normalize background vignetting.</li>
+  <li><strong>12-Directional Linear Top-Hat Filtering:</strong> To capture vascular structures regardless of orientation, linear structuring elements of length <em>l</em> = 15 px are rotated across 12 angles &theta; &in; {0&deg;, 15&deg;, &hellip;, 165&deg;}. The supremum of white top-hat transformations isolates vascular ridges: <em>M(x, y) = max<sub>&theta;</sub> [I<sub>inv</sub> - (I<sub>inv</sub> &comp; L<sub>&theta;</sub>)]</em>.</li>
+  <li><strong>Deep Hybrid Vision Transformer:</strong> The morphological prior is fused with normalized RGB channels to form a 4-channel tensor. A dual 3&times;3 CNN stem preserves high-resolution edge geometry, while a 4-layer Vision Transformer encoder (16&times;16 patches, 4 attention heads) models global vascular connectivity. A convolutional decoder with stem skip connections reconstructs vessel boundaries.</li>
+  <li><strong>Speck Postprocessing:</strong> Connected-component filtering removes spurious false-positive noise islands (&le; 10 px).</li>
+</ol>
+
+<h2>Experimental Benchmark Results (DRIVE Test Set)</h2>
+<p>
+All evaluation metrics were calculated <strong>strictly inside the Field of View (FOV)</strong> to prevent artificial inflation from outer border pixels:
+</p>
+
+<table class="results-table">
+  <thead>
+    <tr>
+      <th>Evaluation Metric</th>
+      <th>Traditional Method (Top-Hat + CLAHE)</th>
+      <th>ML/DL Method (Standard U-Net)</th>
+      <th>Proposed Method (Morph-ViT Hybrid)</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Accuracy</td>
+      <td>89.63%</td>
+      <td>88.60%</td>
+      <td class="highlight-col">92.35% (Best)</td>
+    </tr>
+    <tr>
+      <td>Dice Similarity (F1)</td>
+      <td>64.14%</td>
+      <td>72.38%</td>
+      <td class="highlight-col">77.79% (+13.65% gain)</td>
+    </tr>
+    <tr>
+      <td>IoU (Jaccard Index)</td>
+      <td>47.21%</td>
+      <td>56.71%</td>
+      <td class="highlight-col">63.66% (Best)</td>
+    </tr>
+    <tr>
+      <td>Precision</td>
+      <td>81.19%</td>
+      <td>62.81%</td>
+      <td class="highlight-col">79.09%</td>
+    </tr>
+    <tr>
+      <td>Recall (Sensitivity)</td>
+      <td>53.00%</td>
+      <td>85.38%</td>
+      <td class="highlight-col">76.54% (+23.54% gain)</td>
+    </tr>
+    <tr>
+      <td>Specificity</td>
+      <td>97.40%</td>
+      <td>89.28%</td>
+      <td class="highlight-col">95.71%</td>
+    </tr>
+    <tr>
+      <td>AUC-ROC</td>
+      <td>75.20%</td>
+      <td>94.45%</td>
+      <td class="highlight-col">94.94% (Best)</td>
+    </tr>
+    <tr>
+      <td>Execution Time</td>
+      <td>177.4 ms / img</td>
+      <td>671.7 ms / img</td>
+      <td class="highlight-col">1,099 ms / img (CPU)</td>
+    </tr>
+    <tr>
+      <td>Model Size / Parameters</td>
+      <td>0 MB (0 params)</td>
+      <td>1.88 MB (482,737 params)</td>
+      <td class="highlight-col">3.29 MB (862,049 params)</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2>Key Literature References</h2>
+<ol class="ref-list">
+  <li>J. Staal et al., &ldquo;Ridge-based vessel segmentation in color images of the retina,&rdquo; <em>IEEE Transactions on Medical Imaging</em>, vol. 23, no. 4, pp. 501&ndash;509, 2004.</li>
+  <li>A. Dosovitskiy et al., &ldquo;An image is worth 16x16 words: Transformers for image recognition at scale,&rdquo; <em>ICLR</em>, 2021.</li>
+  <li>O. Ronneberger et al., &ldquo;U-Net: Convolutional networks for biomedical image segmentation,&rdquo; in <em>Proc. MICCAI</em>, 2015, pp. 234&ndash;241.</li>
+  <li>J. Serra, <em>Image Analysis and Mathematical Morphology</em>, Academic Press, London, 1982.</li>
+</ol>
+
+</body>
+</html>
