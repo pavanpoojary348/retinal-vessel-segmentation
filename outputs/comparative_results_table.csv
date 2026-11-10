@@ -1,0 +1,11 @@
+Evaluation Metric,Traditional Method (Morphology),ML/DL Method (Standard U-Net),Proposed Method (Morph-ViT)
+Accuracy,89.63%,88.60%,92.35%
+Dice Score (F1-score),64.14%,72.38%,77.79%
+IoU (Jaccard Index),47.21%,56.71%,63.66%
+Precision,81.19%,62.81%,79.09%
+Recall (Sensitivity),53.00%,85.38%,76.54%
+Specificity,97.40%,89.28%,95.71%
+AUC-ROC,75.20%,94.45%,94.94%
+Execution Time (ms/image),177.4 ms,671.7 ms,1099.7 ms
+Model Size (MB),0.00 MB,1.88 MB,3.29 MB
+Parameters,0 (Algorithmic),"482,737","862,049"
