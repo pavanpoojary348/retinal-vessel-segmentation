@@ -177,3 +177,4 @@ Our project addresses all 6 experiments mandated by the course guidelines:
 2. A. Dosovitskiy et al., "An image is worth 16x16 words: Transformers for image recognition at scale," *ICLR*, 2021.
 3. O. Ronneberger et al., "U-Net: Convolutional networks for biomedical image segmentation," *MICCAI*, pp. 234-241, 2015.
 4. J. Serra, *Image Analysis and Mathematical Morphology*, Academic Press, 1982.
+

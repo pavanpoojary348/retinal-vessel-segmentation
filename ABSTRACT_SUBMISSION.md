@@ -36,3 +36,4 @@ The results demonstrate that injecting domain-specific morphological prior knowl
 3. O. Ronneberger, P. Fischer, and T. Brox, "U-Net: Convolutional networks for biomedical image segmentation," in *Proc. MICCAI*, Springer, 2015, pp. 234–241.
 4. J. Serra, *Image Analysis and Mathematical Morphology*, Academic Press, London, 1982.
 5. S. M. Pizer et al., "Adaptive histogram equalization and its variations," *Computer Vision, Graphics, and Image Processing*, vol. 39, no. 3, pp. 355–368, 1987.
+
