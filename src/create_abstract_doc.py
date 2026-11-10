@@ -150,7 +150,11 @@ def generate_html_and_pdf(proj_dir: str):
   </tr>
   <tr>
     <td class="meta-label">Team Members:</td>
-    <td><strong>[Insert Student Names & USN / Roll Numbers]</strong></td>
+    <td>
+      <strong>Krithin Kusharaj Salian</strong> (NNM24IS110) &bull;
+      <strong>Niriksha</strong> (NNM24IS141) &bull;
+      <strong>Pavan L Poojary</strong> (NNM24IS149)
+    </td>
     <td class="meta-label">Benchmark:</td>
     <td>DRIVE Dataset (40 images, 576&times;576 resolution)</td>
   </tr>
@@ -270,10 +274,9 @@ All evaluation metrics were calculated <strong>strictly inside the Field of View
     if edge_exe:
         cmd = [
             edge_exe,
-            "--headless",
+            "--headless=new",
             "--disable-gpu",
             f"--print-to-pdf={pdf_path}",
-            "--no-pdf-header-footer",
             html_path
         ]
         try:
@@ -357,7 +360,7 @@ def generate_docx(proj_dir: str):
       </w:tr>
       <w:tr>
         <w:tc><w:p><w:r><w:rPr><w:b/><w:sz w:val="18"/></w:rPr><w:t>Team Members:</w:t></w:r></w:p></w:tc>
-        <w:tc><w:p><w:r><w:rPr><w:b/><w:color w:val="0E223D"/><w:sz w:val="18"/></w:rPr><w:t>[Insert Student Names &amp; USN / Roll Numbers]</w:t></w:r></w:p></w:tc>
+        <w:tc><w:p><w:r><w:rPr><w:b/><w:color w:val="0E223D"/><w:sz w:val="18"/></w:rPr><w:t>Krithin Kusharaj Salian (NNM24IS110) | Niriksha (NNM24IS141) | Pavan L Poojary (NNM24IS149)</w:t></w:r></w:p></w:tc>
         <w:tc><w:p><w:r><w:rPr><w:b/><w:sz w:val="18"/></w:rPr><w:t>Benchmark:</w:t></w:r></w:p></w:tc>
         <w:tc><w:p><w:r><w:rPr><w:sz w:val="18"/></w:rPr><w:t>DRIVE (40 fundus images, 576x576)</w:t></w:r></w:p></w:tc>
       </w:tr>

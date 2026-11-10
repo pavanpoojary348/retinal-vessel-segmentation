@@ -99,7 +99,7 @@ def create_deck(proj_dir: str):
     p2.space_before = Pt(8)
 
     # Info card for Team & Course details
-    card1 = s1.shapes.add_shape(MSO_SHAPE.ROUNDED_RECTANGLE, Inches(0.9), Inches(4.5), Inches(11.53), Inches(2.4))
+    card1 = s1.shapes.add_shape(MSO_SHAPE.ROUNDED_RECTANGLE, Inches(0.9), Inches(4.35), Inches(11.53), Inches(2.65))
     card1.fill.solid()
     card1.fill.fore_color.rgb = CARD_BG
     card1.line.color.rgb = TEAL
@@ -108,30 +108,33 @@ def create_deck(proj_dir: str):
     tf_c = card1.text_frame
     tf_c.word_wrap = True
     tf_c.margin_left = Inches(0.5)
-    tf_c.margin_top = Inches(0.25)
+    tf_c.margin_top = Inches(0.2)
 
-    info_lines = [
-        ("Course:", " Fundamentals of Image Processing (FIP)", GOLD, WHITE, 17),
-        ("Team Members:", " [Insert Student Names & USN / Roll Numbers]", GOLD, WHITE, 17),
-        ("Department:", " Department of Computer Science & Engineering", GOLD, WHITE, 16),
-        ("Review Dates:", " Review 1: 11/11/2026  |  Final Viva & Evaluation: 24/11/2026", TEAL, CYAN, 15.5)
+    p0 = tf_c.paragraphs[0]
+    r_l0 = p0.add_run(); r_l0.text = "Course: "; r_l0.font.size = Pt(16); r_l0.font.bold = True; r_l0.font.color.rgb = GOLD
+    r_v0 = p0.add_run(); r_v0.text = "Fundamentals of Image Processing (FIP)   |   Dept. of Computer Science & Engineering"; r_v0.font.size = Pt(16); r_v0.font.bold = True; r_v0.font.color.rgb = WHITE
+
+    p1 = tf_c.add_paragraph()
+    p1.space_before = Pt(6)
+    r_l1 = p1.add_run(); r_l1.text = "Team Members:"; r_l1.font.size = Pt(16); r_l1.font.bold = True; r_l1.font.color.rgb = GOLD
+
+    team_members = [
+        ("Krithin Kusharaj Salian", "NNM24IS110"),
+        ("Niriksha", "NNM24IS141"),
+        ("Pavan L Poojary", "NNM24IS149")
     ]
+    p_team = tf_c.add_paragraph()
+    p_team.space_before = Pt(4)
+    for i, (name, usn) in enumerate(team_members):
+        if i > 0:
+            r_sep = p_team.add_run(); r_sep.text = "     •     "; r_sep.font.size = Pt(16); r_sep.font.bold = True; r_sep.font.color.rgb = TEAL
+        r_name = p_team.add_run(); r_name.text = f"{name} "; r_name.font.size = Pt(16); r_name.font.bold = True; r_name.font.color.rgb = WHITE
+        r_usn = p_team.add_run(); r_usn.text = f"({usn})"; r_usn.font.size = Pt(15.5); r_usn.font.bold = True; r_usn.font.color.rgb = CYAN
 
-    for idx, (label, val, c_lbl, c_val, sz) in enumerate(info_lines):
-        p = tf_c.paragraphs[0] if idx == 0 else tf_c.add_paragraph()
-        if idx > 0:
-            p.space_before = Pt(7)
-        r_lbl = p.add_run()
-        r_lbl.text = label
-        r_lbl.font.size = Pt(sz)
-        r_lbl.font.bold = True
-        r_lbl.font.color.rgb = c_lbl
-
-        r_val = p.add_run()
-        r_val.text = val
-        r_val.font.size = Pt(sz)
-        r_val.font.bold = True
-        r_val.font.color.rgb = c_val
+    p_rev = tf_c.add_paragraph()
+    p_rev.space_before = Pt(7)
+    r_l2 = p_rev.add_run(); r_l2.text = "Review Dates: "; r_l2.font.size = Pt(15); r_l2.font.bold = True; r_l2.font.color.rgb = TEAL
+    r_v2 = p_rev.add_run(); r_v2.text = "Review 1: 11/11/2026   |   Final Project Viva & Evaluation: 24/11/2026"; r_v2.font.size = Pt(15); r_v2.font.bold = True; r_v2.font.color.rgb = CYAN
 
     # =========================================================================
     # SLIDE 2: Abstract & Problem Formulation

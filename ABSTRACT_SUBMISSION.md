@@ -2,8 +2,14 @@
 
 **Course:** Fundamentals of Image Processing (FIP)  
 **Date of Submission:** 11/11/2026  
+**Department:** Department of Computer Science & Engineering  
 **Project Title:** Automated Retinal Blood Vessel Segmentation Using Mathematical Morphology and Vision Transformers (Morph-ViT)  
 **Dataset:** DRIVE (Digital Retinal Images for Vessel Extraction) Benchmark  
+
+**Team Members:**  
+1. **KRITHIN KUSHARAJ SALIAN** (USN: `NNM24IS110`)  
+2. **NIRIKSHA** (USN: `NNM24IS141`)  
+3. **PAVAN L POOJARY** (USN: `NNM24IS149`)  
 
 ---
 

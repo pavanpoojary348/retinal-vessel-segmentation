@@ -11,9 +11,12 @@
 **A Comparative Study on the DRIVE Benchmark**
 
 * **Course:** Fundamentals of Image Processing (FIP)
-* **Student Name / Team:** [Insert Team Member Names & USN / Roll Numbers]
-* **Guide / Evaluator:** [Insert Faculty / Instructor Name]
-* **Date of Presentation:** 11/11/2026
+* **Department:** Department of Computer Science & Engineering
+* **Team Members:**
+  1. Krithin Kusharaj Salian (`NNM24IS110`)
+  2. Niriksha (`NNM24IS141`)
+  3. Pavan L Poojary (`NNM24IS149`)
+* **Review Dates:** Review 1: 11/11/2026 | Final Evaluation: 24/11/2026
 
 **Project Focus:**
 Synthesizing classical image processing techniques from **Unit II (Spatial Image Enhancement)** and **Unit III (Morphological Image Processing)** with **Deep Vision Transformers (ViT)** to solve low-contrast microvascular segmentation under extreme class imbalance.
