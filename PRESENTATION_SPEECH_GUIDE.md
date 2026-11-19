@@ -105,3 +105,4 @@ This guide provides a simple, conversational 30-to-45-second speaking script for
 
 4. **Q: Why is your evaluation strictly inside the FOV?**  
    * **A:** *"Because fundus photos are circular with large black borders outside the eye. If you include the black borders, any model that simply predicts 'background' gets artificially inflated 95%+ accuracy. Evaluating strictly inside the FOV measures real clinical vessel detection."*
+
