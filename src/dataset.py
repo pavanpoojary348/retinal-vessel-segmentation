@@ -1,17 +1,25 @@
 """
-Retinal Blood Vessel Segmentation - DRIVE Dataset Loader
-=========================================================
-Fundamental of Image Processing (FIP) Course Project
+========================================================================================
+FILE: src/dataset.py
+ROLE IN PROJECT: PyTorch Dataset & Data Loader for DRIVE Benchmark
+WHAT IT IS USED FOR:
+  1. Loads DRIVE fundus images, expert ground-truth manual annotations, and circular FOV masks.
+  2. Resizes images to normalized dimensions 576 x 576 pixels (ensuring exact divisibility
+     by Vision Transformer patch size P = 16, resulting in N = 1,296 tokens).
+  3. Precomputes the 4-channel input representation by combining [R, G, B] normalized channels
+     with the 4th morphological Top-Hat feature map generated via src/morphology.py.
+  4. Returns:
+      - input_tensor : (4, 576, 576) float32 (RGB + Morphological prior)
+      - label_tensor : (1, 576, 576) float32 (Expert binary vessel ground truth)
+      - fov_tensor   : (1, 576, 576) float32 (Field of View mask, 1 = valid retinal pixel)
+      - image_id     : str (e.g., '21_training', '01_test')
 
-Loads and preprocesses the DRIVE (Digital Retinal Images for Vessel Extraction) dataset:
-- 20 training images (21-40) with ground-truth vessel masks and FOV masks
-- 20 test images  (01-20) with FOV masks (no ground-truth masks released for public)
-
-Each sample returns:
-  - input_tensor : (4, H, W) float32 -- 3 RGB channels + 1 morphological channel
-  - label_tensor : (1, H, W) float32 -- binary vessel mask
-  - fov_tensor   : (1, H, W) float32 -- field-of-view mask (1 = valid retinal pixel)
-  - image_id     : str -- e.g. "21_training"
+HOW TO EXPLAIN TO MAM (VIVA DEFENSE):
+  "Mam, this file prepares our data pipeline. We use the public DRIVE dataset (40 images).
+   We resize images to 576x576 because 576 is perfectly divisible by 16 (our Transformer patch size).
+   Instead of feeding plain 3-channel RGB to our model, this dataset loader concatenates our
+   12-directional Top-Hat morphological filter as a 4th channel, creating a (4, 576, 576) tensor."
+========================================================================================
 """
 
 import os

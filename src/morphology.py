@@ -1,15 +1,28 @@
 """
-Retinal Blood Vessel Segmentation - Morphological Processing Module
-===================================================================
-Fundamental of Image Processing (FIP) Course Project
+========================================================================================
+FILE: src/morphology.py
+ROLE IN PROJECT: Classical Image Processing Baseline & Feature Extractor (Units II & III)
+WHAT IT IS USED FOR:
+  1. Green Channel Isolation: Extracts the optical wavelength (540-580 nm) where
+     erythrocyte hemoglobin exhibits peak absorption, maximizing vessel-to-choroid contrast.
+  2. Contrast-Limited Adaptive Histogram Equalization (CLAHE): Corrects non-uniform
+     spherical retinal vignetting without amplifying sensor noise (Unit II: Histogram Processing).
+  3. 12-Directional Linear White Top-Hat Filtering: Uses linear structuring elements
+     (length l = 15 px) rotated across 12 angles (0° to 165°) to detect vessels regardless
+     of vascular branching orientation (Unit III: Morphological Processing).
+  4. Directional Supremum: Computes M(x, y) = max_theta [WTH_theta(I_inv)] to produce a
+     physics-grounded vascular prior map.
+  5. Serves both as Mandatory Experiment 1 (Traditional Baseline) and as the 4th input
+     channel fed into our proposed deep Morph-ViT model.
 
-Implements classical and advanced mathematical morphology for retinal fundus images:
-1. Green channel extraction (highest vessel-to-background contrast)
-2. Contrast-Limited Adaptive Histogram Equalization (CLAHE)
-3. Multi-directional and multi-scale morphological Top-Hat transformation
-   using linear structuring elements across multiple orientations (0 deg to 165 deg)
-4. Morphological opening and closing for noise reduction and vessel enhancement
-5. Traditional thresholding baseline for comparative ablation analysis
+HOW TO EXPLAIN TO MAM (VIVA DEFENSE):
+  "Mam, this file implements our syllabus concepts from Unit II and Unit III. First, we take
+   the green channel because hemoglobin absorbs green light best. Next, we apply CLAHE to
+   normalize spherical illumination. Then, because vessels run in all directions, we create
+   linear structuring elements at 12 angles from 0° to 165° and take the White Top-Hat
+   transformation. This gives us our classical baseline (Exp 1) and acts as the morphological
+   prior channel for our proposed hybrid model."
+========================================================================================
 """
 
 import numpy as np

@@ -1,19 +1,27 @@
 """
-Retinal Blood Vessel Segmentation - Evaluation Metrics Module
-============================================================
-Fundamental of Image Processing (FIP) Course Project
+========================================================================================
+FILE: src/metrics.py
+ROLE IN PROJECT: Clinical Evaluation Metrics (Strictly Inside FOV)
+WHAT IT IS USED FOR:
+  1. Implements all 7 standard segmentation evaluation metrics:
+     - Accuracy = (TP + TN) / (TP + TN + FP + FN)
+     - Dice Similarity Coefficient (F1-Score) = 2*TP / (2*TP + FP + FN)
+     - IoU (Jaccard Index) = TP / (TP + FP + FN)
+     - Sensitivity / Recall = TP / (TP + FN)  --> Measures ability to detect thin microvessels
+     - Specificity = TN / (TN + FP)           --> Measures ability to reject background
+     - Precision = TP / (TP + FP)             --> Measures reliability of predicted vessels
+     - AUC-ROC = Area under Receiver Operating Characteristic curve
+  2. STRICT CLINICAL BENCHMARK PROTOCOL:
+     - Applies the circular Field of View (FOV) mask to all predictions and ground truth.
+     - Ignores external non-diagnostic black pixels, preventing artificial metric inflation.
 
-Implements all required performance metrics:
-1. Dice Coefficient (F1-score)
-2. IoU (Intersection over Union / Jaccard Index)
-3. Sensitivity / Recall (True Positive Rate)
-4. Specificity (True Negative Rate)
-5. Accuracy
-6. AUC-ROC (Area Under the Receiver Operating Characteristic Curve)
-7. Precision (Positive Predictive Value)
-
-All metrics are evaluated strictly INSIDE the Field of View (FOV) mask,
-adhering to DRIVE benchmark standards.
+HOW TO EXPLAIN TO MAM (VIVA DEFENSE):
+  "Mam, this file implements our quantitative performance evaluation. A very common flaw
+   in student projects is evaluating over the entire rectangular image, which inflates accuracy
+   to 95%+ because of easy black background outside the eye. In src/metrics.py, we evaluate
+   STRICTLY INSIDE the circular Field of View mask, which is the gold-standard benchmark protocol
+   used in real medical journals."
+========================================================================================
 """
 
 import numpy as np

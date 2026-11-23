@@ -1,12 +1,25 @@
 """
-Retinal Blood Vessel Segmentation - Training Loop
-==================================================
-FIP Course Project — Trains the Morph-ViT model on the DRIVE dataset.
+========================================================================================
+FILE: src/train.py
+ROLE IN PROJECT: Model Training Pipeline for Proposed Morph-ViT
+WHAT IT IS USED FOR:
+  1. Sets up the end-to-end training loop for the hybrid Morph-ViT architecture on DRIVE data.
+  2. Implements an Imbalance-Aware Loss: DiceBCELoss with positive class weighting (w_pos = 4.0),
+     solving the 10:90 class imbalance by penalizing missed blood vessels four times more heavily.
+  3. Optimizer: AdamW optimizer (learning rate = 3e-4, weight decay = 1e-4) paired with a
+     Cosine Annealing learning rate scheduler.
+  4. Validation & Checkpointing: Validates after every epoch inside the FOV mask, tracks Dice
+     and AUC scores, and automatically saves the best performing model weights to
+     `outputs/checkpoints/best_model.pth`.
+  5. Logs epoch-wise metrics to `outputs/train_log.csv`.
 
-Usage:
-    python src/train.py                              # defaults
-    python src/train.py --epochs 50 --batch_size 2
-    python src/train.py --resume outputs/checkpoints/best_model.pth
+HOW TO EXPLAIN TO MAM (VIVA DEFENSE):
+  "Mam, src/train.py trains our Morph-ViT model. Because vessels occupy only ~10% of retinal pixels,
+   standard cross-entropy loss would fail by just predicting all pixels as background. To solve
+   this, we implemented a custom DiceBCELoss with a positive class weight of 4.0, which forces
+   the network to focus on capturing fine microcapillaries. We trained with AdamW and Cosine
+   Annealing, saving the best checkpoint based on validation Dice score."
+========================================================================================
 """
 
 import os, sys, csv, time, argparse, random

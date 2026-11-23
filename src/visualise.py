@@ -1,10 +1,21 @@
 """
-Retinal Blood Vessel Segmentation - Visualisation Utilities
-============================================================
-FIP Course Project
+========================================================================================
+FILE: src/visualise.py
+ROLE IN PROJECT: Diagnostic Plotting & Visual Analytics Module
+WHAT IT IS USED FOR:
+  1. Generates the official training curves: Loss convergence, Dice trajectory, and AUC-ROC
+     progression saved to `outputs/training_curves.png`.
+  2. Creates 2x3 comprehensive diagnostic panels for any fundus scan:
+       Row 1: RGB Fundus, Circular FOV Mask, Expert Ground-Truth Vessels
+       Row 2: Top-Hat Morphological Prior, Morph-ViT Probability Map, Final Binary Prediction
+  3. Plots ROC curves and Precision-Recall curves.
 
-Provides plotting functions for training curves, sample panels, ROC curves,
-and morphological stage visualisations.
+HOW TO EXPLAIN TO MAM (VIVA DEFENSE):
+  "Mam, src/visualise.py handles all scientific plotting for our project. It generates our
+   loss and Dice curves (Figure 5.2 in our report) to prove the model converged without overfitting.
+   It also creates 6-tile visual inspection panels showing each stage from input to morphology,
+   probability heatmap, and final clean binary output."
+========================================================================================
 """
 
 import os

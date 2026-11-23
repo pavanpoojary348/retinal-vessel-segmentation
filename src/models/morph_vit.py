@@ -1,14 +1,27 @@
 """
-Retinal Blood Vessel Segmentation - Morphology-Guided Vision Transformer (Morph-ViT)
-===================================================================================
-Fundamental of Image Processing (FIP) Course Project
+========================================================================================
+FILE: src/models/morph_vit.py
+ROLE IN PROJECT: Proposed Novel Hybrid Architecture (Morph-ViT) — Experiment 3
+WHAT IT IS USED FOR:
+  1. 4-Channel Multi-Modal Fusion: Accepts a 4-channel tensor [R, G, B, Morphological Prior],
+     injecting classical optics knowledge directly into deep learning.
+  2. CNN High-Resolution Stem: Two 3x3 Conv layers preserve thin microcapillary edge gradients
+     and produce skip connection features (64 channels) for the decoder.
+  3. Vision Transformer Tokenizer: Divides the 576x576 image into 16x16 non-overlapping patches,
+     projecting them to 128-dimensional tokens (N = 1,296 tokens).
+  4. 4-Layer Self-Attention Encoder: Multi-Head Self-Attention (4 heads) models global vascular
+     tree continuity, allowing the network to connect interrupted vessel branches across junctions.
+  5. Progressive Convolutional Decoder: Upsamples features back to full resolution (576x576)
+     and fuses them with CNN stem skip connections to eliminate edge blur.
+  6. Output Head: Sigmoid activation outputs vessel probability map [0, 1].
 
-A hybrid Vision Transformer architecture designed for medical fundus segmentation:
-1. Multi-scale morphological feature integration (fusing classical FIP filters with deep attention)
-2. Configurable Patch Embedding (patch size P x P)
-3. Multi-Head Self-Attention (MHSA) Transformer Encoder with configurable depth and attention heads
-4. High-resolution convolutional decoder with skip connections to preserve thin vessels
-5. Binary vessel probability map output [0, 1]
+HOW TO EXPLAIN TO MAM (VIVA DEFENSE):
+  "Mam, this is our proposed model, Morph-ViT. CNNs alone only see local 3x3 pixel areas, so they
+   often break thin vessels at bifurcations. Pure Transformers are great at global attention
+   but lose fine pixel edges. Morph-ViT solves both: it takes 4 channels (RGB + our morphological
+   filter), uses a CNN stem for sharp edges, a 4-layer Vision Transformer to connect long vascular
+   branches globally, and a skip decoder to produce high-precision vessel segmentation."
+========================================================================================
 """
 
 import math

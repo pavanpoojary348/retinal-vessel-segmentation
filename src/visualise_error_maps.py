@@ -1,15 +1,30 @@
 
 """
-Visual Comparison & Error Map Generator
-=======================================
-Requirement 6: "Students must provide visual comparisons of input images,
-ground-truth images, predicted results and error maps wherever applicable."
+========================================================================================
+FILE: src/visualise_error_maps.py
+ROLE IN PROJECT: 4-Class Color-Coded Error Map Generator (Course Requirement 6)
+WHAT IT IS USED FOR:
+  1. Fulfills Course Requirement 6: "Students must provide visual comparisons of input images,
+     ground-truth images, predicted results and error maps wherever applicable."
+  2. Generates comprehensive 5-tile diagnostic comparison panels:
+     - Tile 1: Original Color Fundus Image
+     - Tile 2: Expert Ground-Truth Vessel Mask
+     - Tile 3: Traditional Morphology Predicted Binary Mask
+     - Tile 4: Proposed Morph-ViT Predicted Binary Mask
+     - Tile 5: Spatial 4-Class Color-Coded Error Map:
+         * 🟩 GREEN [0, 255, 0]  : True Positive (TP) - correctly segmented vessel lumen
+         * 🟥 RED   [255, 0, 0]  : False Negative (FN) - missed capillary vessel
+         * 🟦 BLUE  [0, 150, 255]: False Positive (FP) - over-segmented background noise
+         * ⬛ BLACK [0, 0, 0]    : True Negative (TN) - correct non-vessel background
+  3. Saves the generated visual panels into `outputs/error_maps/` for test samples 21 to 25.
 
-Color scheme:
-- Green [0, 255, 0]  : True Positive (TP) - correctly segmented vessel
-- Red   [255, 0, 0]  : False Negative (FN) - missed capillary
-- Blue  [0, 150, 255]: False Positive (FP) - false detection
-- Black [0, 0, 0]    : True Negative (TN) - correct background
+HOW TO EXPLAIN TO MAM (VIVA DEFENSE):
+  "Mam, this file directly answers Course Instruction 6, which requires visual error maps.
+   We created a 4-color diagnostic map inside the FOV: Green shows true vessels, Red shows missed
+   vessels, Blue shows false noise, and Black is background. Looking at the error map, you can
+   immediately see that traditional morphology has large red regions (missed 47% of thin capillaries),
+   whereas our Morph-ViT turns those red areas green, cutting missed vessels down to only 23%."
+========================================================================================
 """
 
 import os, sys

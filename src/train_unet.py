@@ -1,7 +1,21 @@
 """
-Train Standard U-Net on DRIVE dataset
-=====================================
-Experiment 2: ML/DL-Based Technique Baseline
+========================================================================================
+FILE: src/train_unet.py
+ROLE IN PROJECT: Model Training Pipeline for Standard U-Net (Experiment 2 Baseline)
+WHAT IT IS USED FOR:
+  1. Trains the standard 3-channel U-Net baseline on the DRIVE dataset for 15 epochs.
+  2. Uses identical training conditions (AdamW, Cosine Annealing, DiceBCELoss) to ensure
+     a completely fair scientific comparison with our proposed Morph-ViT model.
+  3. Saves the best checkpoint to `outputs/checkpoints/unet_best.pth`.
+  4. Records the exact training progression and convergence metrics for Experiment 2.
+
+HOW TO EXPLAIN TO MAM (VIVA DEFENSE):
+  "Mam, src/train_unet.py trains our pure deep learning baseline (Standard U-Net). To ensure
+   that our comparison is 100% fair and scientific, we train U-Net using the exact same loss
+   function, optimizer, and training split as Morph-ViT. The only difference is that U-Net receives
+   standard 3-channel RGB without our morphological prior. This allows us to isolate and prove
+   the exact contribution of our morphological feature integration."
+========================================================================================
 """
 
 import os, sys, time, csv, random

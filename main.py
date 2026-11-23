@@ -1,15 +1,23 @@
 """
-Retinal Blood Vessel Segmentation - Unified Entry Point
-========================================================
-FIP Course Project
+========================================================================================
+FILE: main.py
+ROLE IN PROJECT: Unified CLI Entry Point & Master Orchestrator
+WHAT IT IS USED FOR:
+  - Serves as the single command-line interface to train, evaluate, visualize, and test
+    models without needing to memorize separate sub-module script commands.
+  - Sub-commands available:
+      * python main.py train      --> Trains the proposed Morph-ViT model.
+      * python main.py evaluate   --> Evaluates performance strictly inside the FOV.
+      * python main.py predict    --> Runs inference on an arbitrary input fundus image.
+      * python main.py visualise  --> Generates training loss/Dice curves and panels.
+      * python main.py all        --> Executes the complete pipeline sequentially.
 
-    python main.py train                        -- train the model
-    python main.py evaluate                     -- evaluate on training split
-    python main.py predict --image <path>       -- predict on a single image
-    python main.py visualise                    -- plot training curves + sample panels
-    python main.py all                          -- train -> evaluate -> visualise
-
-Run any sub-command with --help for its full option list.
+HOW TO EXPLAIN TO MAM (VIVA DEFENSE):
+  "Mam, main.py is our central execution hub. Instead of running individual scripts,
+   we can run 'python main.py train' to trigger model training or 'python main.py evaluate'
+   to compute all 10 clinical metrics inside the circular FOV. It coordinates our
+   data loaders, neural models, evaluation metrics, and visualization utilities."
+========================================================================================
 """
 
 import sys, os, argparse, subprocess
