@@ -196,7 +196,6 @@ retinal-vessel-segmentation/
 │   └── predictions/                      --> Segmented masks and green clinical overlays
 │
 ├── presentation_simple.pptx              --> Simple 7-slide oral presentation deck
-├── PRESENTATION_SPEECH_GUIDE.md          --> 30-second speaking script for every slide
 ├── abstract.pdf / abstract.docx          --> 1-page paper abstract with team credentials
 ├── REPORT_DATA_AND_CLAUDE_PROMPT.pdf     --> Report data pack with <20% AI detection prompt
 ├── main.py                               --> Unified CLI entry point
