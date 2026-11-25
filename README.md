@@ -197,7 +197,6 @@ retinal-vessel-segmentation/
 │
 ├── presentation_simple.pptx              --> Simple 7-slide oral presentation deck
 ├── abstract.pdf / abstract.docx          --> 1-page paper abstract with team credentials
-├── REPORT_DATA_AND_CLAUDE_PROMPT.pdf     --> Report data pack with <20% AI detection prompt
 ├── main.py                               --> Unified CLI entry point
 └── requirements.txt                      --> Python package dependencies
 ```
